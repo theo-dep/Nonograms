@@ -49,11 +49,13 @@ int Run() {
         Logger::get()->info("There is nothing to solve");
     } else if (cli_args::inputImage) {
         std::string image_path = args::get(cli_args::inputImage);
+        const bool convertToMono = args::get(cli_args::black);
         std::string result_path = image_path.substr(0,
-                image_path.find_last_of('.')) + ".pzl";
+                image_path.find_last_of('.')) +
+                (convertToMono ? "_mono" : "") + ".pzl";
         Logger::get()->info("Trying to encode {}", image_path);
         Logger::get()->info("Save the puzzle to {}", result_path);
-        Paint::EncodeImage(image_path, result_path);
+        Paint::EncodeImage(image_path, result_path, convertToMono);
     } else if (cli_args::benchmark) {
         Benchmark benchmark;
         if (!benchmark.Run(args::get(cli_args::benchmark))) {

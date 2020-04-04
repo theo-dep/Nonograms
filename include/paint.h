@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -28,7 +28,8 @@ class Paint {
     static void ReleaseFrames();
 
     static void EncodeImage(const std::string& image_path,
-            const std::string& filename);
+            const std::string& filename,
+            const bool& toMono = false);
 
  private:
     static void WriteImage(Magick::Image& image, int image_counter);

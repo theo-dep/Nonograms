@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -424,13 +424,18 @@ void Paint::ReleaseFrames() {
     }
 }
 
-void Paint::EncodeImage(const string& image_path, const string& filename) {
+void Paint::EncodeImage(const string& image_path, const string& filename, const bool& toMono) {
     Magick::Image img;
     try {
         img.read(image_path);
     } catch (Magick::ErrorBlob& e) {
         Logger::get()->error(e.what());
         return;
+    }
+
+    if (toMono) {
+        img.type(Magick::GrayscaleType);
+        img.threshold(50000.);
     }
 
     ofstream fout(filename);
@@ -546,4 +551,3 @@ void Paint::EncodeImage(const string& image_path, const string& filename) {
 
     fout.close();
 }
-
