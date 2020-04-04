@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -17,16 +17,16 @@ int InitArguments(int argc, char** argv) {
     try {
         cli_args::parser.ParseCLI(argc, argv);
     }
-    catch(args::Help) {
+    catch(const args::Help&) {
         std::cout << cli_args::parser;
         return 0;
     }
-    catch(args::ParseError e) {
+    catch(const args::ParseError& e) {
         Logger::get()->error(e.what());
         std::cerr << cli_args::parser;
         return 1;
     }
-    catch(args::ValidationError e) {
+    catch(const args::ValidationError& e) {
         Logger::get()->error(e.what());
         std::cerr << cli_args::parser;
         return 1;

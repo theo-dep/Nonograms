@@ -1,10 +1,12 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
 #ifndef NONOGRAMS_LOGGER_H_
 #define NONOGRAMS_LOGGER_H_
 
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 // Logs everything if necessary, uses pseudo-singleton structure

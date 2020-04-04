@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -11,6 +11,7 @@
 #include <map>
 #include <thread>
 #include <utility>
+#include <climits>
 
 #include <arguments.h>
 #include <logger.h>

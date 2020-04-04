@@ -55,4 +55,14 @@ add_definitions(-DBUGGY_MAGIC)  # can't write gif images
 ```
 And then rebuild and run the program.
 
-Additional libraries used in the project - [Magick++](https://github.com/ImageMagick/ImageMagick) and [args](https://github.com/Taywee/args). They may require the installation of some dependent libraries.
+Additional libraries used in the project - [Magick++](https://github.com/ImageMagick/ImageMagick), [spdlog](https://github.com/gabime/spdlog) and [args](https://github.com/Taywee/args). They may require the installation of some dependent libraries.
+
+Magick++ for Linux:
+~~~
+sudo apt update && build-dep imagemagick
+cd ImageMagick
+./configure
+make
+sudo make install
+sudo ldconfig /usr/local/lib
+~~~
