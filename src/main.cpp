@@ -12,6 +12,7 @@
 #include <timespan.h>
 #include <Magick++.h>
 
+#include "model/Grid.h"
 
 int InitArguments(int argc, char** argv) {
     try {
@@ -64,8 +65,13 @@ int Run() {
     } else {
         Timespan ts;
         Puzzle puzzle;
-        if (!puzzle.Solve(args::get(cli_args::inputPuzzle))) {
+        const bool showGui = args::get(cli_args::gui);
+        if (!puzzle.Solve(args::get(cli_args::inputPuzzle), !showGui)) {
             return 1;
+        }
+        if (showGui) {
+            Grid grid;
+            grid.init(puzzle.config());
         }
         ts.Peek(true);
     }

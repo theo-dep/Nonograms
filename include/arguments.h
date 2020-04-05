@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -28,6 +28,7 @@ extern args::Flag gif;
 extern args::Flag cool;
 extern args::Flag empty;
 extern args::Flag display;
+extern args::Flag gui;
 }  // namespace cli_args
 
 #endif

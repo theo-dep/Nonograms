@@ -56,4 +56,6 @@ args::Flag empty(parser, "empty", "Don't save the image of the puzzle",
 
 args::Flag display(parser, "display", "Display the image instead of writing to"
         " file", {'d', "display"});
+
+args::Flag gui(parser, "gui", "Show the GUI to resolve the nonogram", {'g', "gui"});
 }  // namespace cli_args

@@ -303,7 +303,7 @@ bool Puzzle::UpdateState(OneLineSolver& solver, vector<int8_t>& dead_rows,
     return true;
 }
 
-bool Puzzle::Solve(const string& filename) {
+bool Puzzle::Solve(const string& filename, const bool& drawImage) {
     config_.filename = filename;
     image_count_ = 0;
 
@@ -372,6 +372,8 @@ bool Puzzle::Solve(const string& filename) {
         return false;
     }
 
-    DrawImage();
+    if (drawImage) {
+        DrawImage();
+    }
     return true;
 }

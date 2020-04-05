@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright © 2018 Evgeny Shulgin <izaronplatz@gmail.com>
  * This code is released under the license described in the LICENSE file
  */
@@ -34,11 +34,13 @@ class Puzzle {
     bool ReadColored(const std::string& filename);
     bool ReadBlack(const std::string& filename);
     // Returns true if solved successfully
-    bool Solve(const std::string& filename);
+    bool Solve(const std::string& filename, const bool& drawImage = true);
     // Returns true if a new iteration of solution went correctly
     bool IterationSolve();
     // Parses strings like "#d7d7d7" to Color type
     static Color ParseColor(const std::string& hex_color);
+    // Returns the configuration for the GUI
+    const Config& config(void) const { return config_; }
 
  private:
     // Reads all the colors to config_

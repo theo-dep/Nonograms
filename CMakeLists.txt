@@ -7,7 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-compare")
 
 file(GLOB SOURCE_FILES "src/*cpp")
-set(INCLUDE_DIRS ${INCLUDE_DIRS} include/ spdlog/include/ args/)
+file(GLOB MODEL_SOURCE_FILES "src/model/*cpp")
+set(INCLUDE_DIRS ${INCLUDE_DIRS} include/ spdlog/include/ args/ src/model)
 
 add_definitions(-DMAGICKCORE_QUANTUM_DEPTH=8)  # for ImageMagick
 add_definitions(-DMAGICKCORE_HDRI_ENABLE=0)  # for ImageMagick
@@ -25,7 +26,7 @@ if(NOT spdlog_FOUND)
 endif()
 
 include_directories(${INCLUDE_DIRS})
-add_executable(nonograms_solver ${SOURCE_FILES})
+add_executable(nonograms_solver ${SOURCE_FILES} ${MODEL_SOURCE_FILES})
 
 target_link_libraries(nonograms_solver ${ImageMagick_LIBRARIES})
 target_link_libraries(nonograms_solver ${CMAKE_THREAD_LIBS_INIT})
