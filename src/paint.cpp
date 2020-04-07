@@ -15,7 +15,20 @@
 #include <logger.h>
 #include <puzzle.h>
 
+#ifdef _MSC_VER
+#  include <intrin.h>
+#  define __builtin_popcount __popcnt
+
+static inline int __builtin_ctz(uint32_t x) {
+    unsigned long ret;
+    _BitScanForward(&ret, x);
+    return (int)ret;
+}
+#endif
+
+#pragma warning(push, 0)
 #include <Magick++.h>
+#pragma warning(pop)
 
 using std::endl;
 using std::get;
@@ -100,7 +113,7 @@ int GetRandomNumber() {
 int GetColorIndex(map<string, int>& color_map, const Magick::Color& color) {
     string key = MagickColorToString(color);
     if (!color_map.count(key)) {
-        int size = color_map.size();
+        int size = static_cast<int>(color_map.size());
         color_map[key] = size;
     }
     return color_map[key];
@@ -270,7 +283,7 @@ Magick::Image Paint::CreateCoolImage(const Puzzle::Config& config) {
 
     // draw horizontal groups
     for (int i = 0; i < row_groups.size(); i++) {
-        int pos = max_group_count_horizontal - row_groups[i].size() + 1;
+        int pos = max_group_count_horizontal - static_cast<int>(row_groups[i].size()) + 1;
         for (const auto& g : row_groups[i]) {
             ImageDrawSquare(image, magic_colors[g.second],
                     i + 2 + max_group_count_vertical, pos, pixelize);
@@ -280,7 +293,7 @@ Magick::Image Paint::CreateCoolImage(const Puzzle::Config& config) {
 
     // draw vertical groups
     for (int i = 0; i < col_groups.size(); i++) {
-        int pos = max_group_count_vertical - col_groups[i].size() + 1;
+        int pos = max_group_count_vertical - static_cast<int>(col_groups[i].size()) + 1;
         for (const auto& g : col_groups[i]) {
             ImageDrawSquare(image, magic_colors[g.second], pos,
                     i + 2 + max_group_count_horizontal, pixelize);

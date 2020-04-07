@@ -18,7 +18,14 @@
 #include <one_line_solver.h>
 #include <paint.h>
 
+#ifdef _MSC_VER
+#  include <intrin.h>
+#  define __builtin_popcount __popcnt
+#endif
+
+#pragma warning(push, 0)
 #include <Magick++.h>
+#pragma warning(pop)
 
 using std::ifstream;
 using std::list;
@@ -37,9 +44,9 @@ Puzzle::Color Puzzle::ParseColor(const string& hex_color) {
         Logger::get()->warn("Colors should look like \"#d7e41a\"");
         return make_tuple(0, 0, 0);
     }
-    uint8_t r = stoul(hex_color.substr(1, 2), nullptr, 16);
-    uint8_t g = stoul(hex_color.substr(3, 2), nullptr, 16);
-    uint8_t b = stoul(hex_color.substr(5, 2), nullptr, 16);
+    uint8_t r = static_cast<uint8_t>(stoul(hex_color.substr(1, 2), nullptr, 16));
+    uint8_t g = static_cast<uint8_t>(stoul(hex_color.substr(3, 2), nullptr, 16));
+    uint8_t b = static_cast<uint8_t>(stoul(hex_color.substr(5, 2), nullptr, 16));
     return make_tuple(r, g, b);
 }
 
@@ -233,7 +240,7 @@ void Puzzle::DrawImage() {
 
 bool Puzzle::UpdateGroupsState(OneLineSolver& solver, vector<int8_t>& dead,
         vector<vector<pair<int, int>>>& groups, vector<vector<int>>& masks) {
-    int len = groups.size();
+    int len = static_cast<int>(groups.size());
 
     int extra_move_count = 0;
 

@@ -10,7 +10,9 @@
 #include <paint.h>
 #include <puzzle.h>
 #include <timespan.h>
+#pragma warning(push, 0)
 #include <Magick++.h>
+#pragma warning(pop)
 
 #include "model/Grid.h"
 
